@@ -1,0 +1,9 @@
+# Extract audio in mp3 format
+--extract-audio
+--audio-format=mp3
+
+# Best audio quality
+--audio-quality 0
+
+# Template for files
+-o '%(title)s.%(ext)s'
