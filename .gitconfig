@@ -1,0 +1,84 @@
+[alias]
+	a = add --all
+	ai = add --interactive
+	#############
+	c = commit
+	ca = !git add -A && git commit -av
+	cam = commit --amend
+	#############
+	loggg = log --color --graph --date-order --date=local
+    lg = !git loggg --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)\
+%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	ll = !git loggg --stat --pretty=format:\
+'%C(red)%d %C(yellow)%B%n\
+%C(ul)Hash:%C(reset) %C(magenta)%H%n\
+%C(ul)Author:%C(reset) %C(bold blue)%an<%ae> %C(reset)%C(green)%ar%C(cyan)(%ad)%n'
+	lp = !git ll --patch
+	#############
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	ms = merge --skip
+	#############
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase --interactive
+	rbs = rebase --skip
+	#############
+	re = reset
+	rh = reset HEAD
+	reh = reset --hard
+	rem = reset --mixed
+	res = reset --soft
+	rehh = reset --hard HEAD
+	remh = reset --mixed HEAD
+	resh = reset --soft HEAD
+	#############
+	s = status
+	st = status
+	ss = status --short --branch
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	pager = true
+	status = auto
+	ui = true
+[color "diff-highlight"]
+	newHighlight = green bold 52
+	newNomal = green bold
+	oldHighlight = red bold 52
+	oldNormal = red bold
+[color "diff"]
+	frag = magenta bold
+	new = green bold
+	old = red bold
+	whitespace = red reverse
+
+[commit]
+	gpgsign = true
+
+[core]
+	autocrlf = input
+	editor = vim
+	excludesfile = ~/.gitignore
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	untrackedCache = true
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+[diff]
+	tool = vimdiff
+
+[merge]
+	log = true
+	tool = vim
+
+[push]
+	default = matching
+	followTags = true
+
+[user]
+	name = Filip Hrenić
+	email = hrenic.filip@gmail.com
