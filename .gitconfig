@@ -1,4 +1,10 @@
 [alias]
+	aliases = !"git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'"
+	#############
+	assume   = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed  = !"git ls-files -v | grep ^h | cut -c 3-"
+	#############
 	a = add --all
 	ai = add --interactive
 	#############
@@ -6,14 +12,24 @@
 	ca = !git add -A && git commit -av
 	cam = commit --amend
 	#############
-	loggg = log --color --graph --date-order --date=local
-    lg = !git loggg --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)\
+	d = diff
+	#############
+	get = !git pull --rebase && git submodule update --init --recursive
+	#############
+	ls = ls-files
+	#############
+	logbase = log --color --graph --date-order --date=local
+    lg = !git logbase --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)\
 %d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	ll = !git loggg --stat --pretty=format:\
+	ll = !git logbase --stat --pretty=format:\
 '%C(red)%d %C(yellow)%B%n\
 %C(ul)Hash:%C(reset) %C(magenta)%H%n\
 %C(ul)Author:%C(reset) %C(bold blue)%an<%ae> %C(reset)%C(green)%ar%C(cyan)(%ad)%n'
 	lp = !git ll --patch
+	# list my commits only
+	lm = !git ll --author $(git config user.email)
+	# list my today commits
+	lmd = !git lp --author $(git config user.email) --since yesterday
 	#############
 	m = merge
 	ma = merge --abort
@@ -38,6 +54,13 @@
 	s = status
 	st = status
 	ss = status --short --branch
+	#############
+	save = !git stash save
+	pop = !git stash pop
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	#############
+	undo = reset --hard
+	uncommit = reset --soft HEAD^
 
 [color]
 	branch = auto
@@ -68,7 +91,11 @@
 	untrackedCache = true
 	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
+[credential]
+	helper = osxkeychain
+
 [diff]
+	renames = copy
 	tool = vimdiff
 
 [merge]
