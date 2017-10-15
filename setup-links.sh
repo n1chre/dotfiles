@@ -26,19 +26,19 @@ linky() {
             local target="${dst}/$(basename ${name})"
             if [ ! -e "${target}" ]; then
                 ln -s "${name}" "${target}"
-            else
-                echo "${target} exists; skipping..."
-            fi
+                echo "${target} --> ${name}"
         done
     elif [ ! -e "${dst}" ]; then
         ln -s "${src}" "${dst}"
-    else
-        echo "${dst} exists; skipping..."
+        echo "${dst} --> ${src}"
     fi
 }
 
 # setup personal bin folder
 linky bin
+
+# setup .config folder
+linky .config
 
 # setup git
 linky .gitconfig
