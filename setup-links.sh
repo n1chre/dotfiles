@@ -27,6 +27,7 @@ linky() {
             if [ ! -e "${target}" ]; then
                 ln -s "${name}" "${target}"
                 echo "${target} --> ${name}"
+            fi
         done
     elif [ ! -e "${dst}" ]; then
         ln -s "${src}" "${dst}"
