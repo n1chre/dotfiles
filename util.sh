@@ -12,8 +12,8 @@ else
     OSX=0
 fi
 
-backup="$DOTFILES/backup"
-mkdir -p $backup
+backup="${DOTFILES}/backup"
+mkdir -p "${backup}"
 
 print_info() {
   # Print output in purple
@@ -33,16 +33,6 @@ print_question() {
 print_success() {
   # Print output in green
   printf "\e[0;32m  [✔] %s\e[0m\n" "$1"
-}
-
-print_result() {
-  if [ "$1" -eq 0 ]; then
-      print_success "$2"
-  else
-      print_error "$2"
-  fi
-
-  [ "$3" = "true" ] && [ "$1" -ne 0 ] && exit
 }
 
 # asking for stuff
@@ -69,16 +59,27 @@ ask_sudo() {
 }
 
 cmd_exists() {
-  [ -x "$(command -v "$1")" ] && true || false
+  if [ -x "$(command -v "$1")" ]; then
+      true
+  else
+      false
+  fi
 }
 
 execute() {
-  $1 &> /dev/null
-  print_result $? "${2:-$1}"
+  if $1 &> /dev/null; then
+      print_success "${2:-$1}"
+  else
+      print_error "${2:-$1}"
+  fi
 }
 
 is_git_repository() {
-  git rev-parse &>/dev/null && true || false
+  if git rev-parse &>/dev/null; then
+      true
+  else
+      false
+  fi
 }
 
 link_ask() {
@@ -93,8 +94,8 @@ link_ask() {
         if ask "'${targetFile}' already exists, do you want to overwrite it?"
         then
             local backupFile=${backup}${targetFile}
-            mkdir -p $(dirname "${backupFile}")
-            mv ${targetFile} ${backupFile} && print_info "Backed up to ${backupFile}"
+            mkdir -p "$(dirname "${backupFile}")"
+            mv "${targetFile}" "${backupFile}" && print_info "Backed up to ${backupFile}"
             execute "ln -fs ${sourceFile} ${targetFile}" "${targetFile} → ${sourceFile}"
         else
             print_error "${targetFile} → ${sourceFile}"
@@ -103,7 +104,7 @@ link_ask() {
 }
 
 link_smart() {
-    # link_smart sourceFile [targetFile=$HOME/target]
+    # link_smart sourceFile [targetFile = ~/sourceFile]
     # if target is a file, do link of a file
     # if target is a directory, link insides of the directory
 
@@ -124,10 +125,9 @@ link_smart() {
 
     if [ -d "${source}" ]; then
         mkdir -p "${targetFile}"
-        for name in `find ${source} -depth 1`; do
+        for name in $(find "${source}" -depth 1); do
             local target
-            target=$(basename "${name}")
-            target="${targetFile}/${target}"
+            target=${targetFile}/$(basename "${name}")
             link_ask "${name}" "${target}"
         done
     else
@@ -139,7 +139,6 @@ export -f print_info
 export -f print_error
 export -f print_question
 export -f print_success
-export -f print_result
 
 export -f ask
 export -f ask_sudo

@@ -2,11 +2,12 @@
 
 # get utility function
 DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
-source $DOTFILES/util.sh
+# shellcheck source=./util.sh disable=SC1091
+source "$DOTFILES/util.sh"
 
 install_zsh() {
   # If zsh isn't installed, try to install it
-  if [ ${OSX} -eq 1 ]; then
+  if [ "${OSX}" -eq 1 ]; then
       brew install zsh
   else
     # it better be linux
@@ -22,7 +23,7 @@ install_zsh() {
 
 install_oh_my_zsh() {
     # Install Oh My Zsh if it isn't already present
-    if [ ! -d ${HOME}/.oh-my-zsh ]; then
+    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
         print_info "oh-my-zsh not found, donloading it..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         print_success "Installed oh-my-zsh"
@@ -53,9 +54,9 @@ fi
 install_oh_my_zsh
 
 # install powerlevel9k theme
-if [ ! -d ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k ]; then
+if [ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" ]; then
     git clone https://github.com/bhilburn/powerlevel9k.git \
-              ${HOME}/.oh-my-zsh/custom/themes/powerlevel9k
+              "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k"
     print_success "Installed powerlevel9k theme"
     print_info "Install font SourceCodePro for everything to work!"
     print_info "url: https://github.com/adobe-fonts/source-code-pro"
@@ -68,9 +69,9 @@ fi
 
 print_info "Setup fuzzy finder"
 
-if [ ! -d ${HOME}/.fzf ]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
-    ${HOME}/.fzf/install
+if [ ! -d "${HOME}/.fzf" ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.fzf"
+    "${HOME}/.fzf/install"
     print_success "Installed fuzzy finder"
 fi
 
@@ -92,6 +93,6 @@ rm -f crontab.tmp
 ################################################################################
 
 # set up symlinks and start using it
-$DOTFILES/setup-links.sh
-zsh ${HOME}/.zshrc
+"$DOTFILES/setup-links.sh"
+zsh "${HOME}/.zshrc"
 print_success "All done! Start using it now"
