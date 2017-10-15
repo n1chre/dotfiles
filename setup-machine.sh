@@ -94,5 +94,5 @@ rm -f crontab.tmp
 
 # set up symlinks and start using it
 "$DOTFILES/setup-links.sh"
-zsh "${HOME}/.zshrc"
-print_success "All done! Start using it now"
+print_success "All done!"
+print_info "execute \$ source ~/.zshrc"
