@@ -1,0 +1,3 @@
+# ignore backup folder
+# it is used for storing overwritten files/folders
+backup

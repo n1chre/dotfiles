@@ -92,7 +92,8 @@ link_ask() {
     else
         if ask "'${targetFile}' already exists, do you want to overwrite it?"
         then
-            local backupFile=${backup}/${targetFile}
+            local backupFile=${backup}${targetFile}
+            mkdir -p $(dirname "${backupFile}")
             mv ${targetFile} ${backupFile} && print_info "Backed up to ${backupFile}"
             execute "ln -fs ${sourceFile} ${targetFile}" "${targetFile} → ${sourceFile}"
         else
