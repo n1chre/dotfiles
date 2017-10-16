@@ -1,11 +1,12 @@
 #!/bin/bash
 
+# shellcheck disable=SC2034 disable=SC2044
+# complains about not exporting variables and for...find being fragile
+
 # get dotfiles directory
-export DOTFILES
 DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
 
 # set os
-export OSX
 if [ "$(uname -s)" = "Darwin" ]; then
     OSX=1
 else
@@ -74,14 +75,6 @@ execute() {
   fi
 }
 
-is_git_repository() {
-  if git rev-parse &>/dev/null; then
-      true
-  else
-      false
-  fi
-}
-
 link_ask() {
     [ $# -eq 2 ] || false
     local sourceFile=$1
@@ -126,26 +119,9 @@ link_smart() {
     if [ -d "${source}" ]; then
         mkdir -p "${targetFile}"
         for name in $(find "${source}" -depth 1); do
-            local target
-            target=${targetFile}/$(basename "${name}")
-            link_ask "${name}" "${target}"
+            link_ask "${name}" "${targetFile}/$(basename "${name}")"
         done
     else
         link_ask "${source}" "${targetFile}"
     fi
 }
-
-export -f print_info
-export -f print_error
-export -f print_question
-export -f print_success
-
-export -f ask
-export -f ask_sudo
-
-export -f execute
-export -f cmd_exists
-export -f is_git_repository
-
-export -f link_ask
-export -f link_smart

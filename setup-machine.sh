@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# get utility function
-DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
-# shellcheck source=./util.sh disable=SC1091
-source "$DOTFILES/util.sh"
+# get utility functions
+source ./util.sh  # shellcheck disable=SC1091
 
 MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
 
@@ -36,7 +34,7 @@ install_oh_my_zsh() {
         execute "sudo chsh -s /bin/zsh" "Changed shell to zsh"
     fi
 
-    mkdir -p ${MY_ZSH}
+    mkdir -p "${MY_ZSH}"
     print_info "Put custom scripts in ${MY_ZSH} and source them in .zshrc"
 }
 

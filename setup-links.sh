@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # get utility functions
-DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
-# shellcheck source=./util.sh disable=SC1091
-source "$DOTFILES/util.sh"
+source ./util.sh  # shellcheck disable=SC1091
 
 MY_ZSH=.oh-my-zsh/custom/my_zsh
 
@@ -23,7 +21,7 @@ link_smart git/gitignore .gitignore
 # link zsh stuff
 link_smart zsh/zshrc .zshrc
 link_smart zsh/zshenv .zshenv
-link_smart zsh ${MY_ZSH}
+link_smart zsh "${MY_ZSH}"
 # remove some links
-unlink ${HOME}/${MY_ZSH}/zshrc
-unlink ${HOME}/${MY_ZSH}/zshenv
+unlink "${HOME}/${MY_ZSH}/zshrc"
+unlink "${HOME}/${MY_ZSH}/zshenv"
