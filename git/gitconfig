@@ -111,17 +111,21 @@
 
 [merge]
 	log = true
+	stat = true
 	tool = vim
 
 [push]
 	default = matching
 	followTags = true
 
+[rerere]
+	enabled = true
+
 [user]
 	name = Filip Hrenić
-    email = hrenic.filip@gmail.com
+  email = hrenic.filip@gmail.com
 
 # Load local config
 # this needs to be at the end of the file so above can be overwritten
 [include]
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
