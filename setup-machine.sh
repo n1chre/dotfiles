@@ -5,6 +5,9 @@ DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
 # shellcheck source=./util.sh disable=SC1091
 source "$DOTFILES/util.sh"
 
+# depends on zshrc, prompt.zsh, setup-machine.sh and setup-links
+MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
+
 install_zsh() {
   # If zsh isn't installed, try to install it
   if [ "${OSX}" -eq 1 ]; then
@@ -33,6 +36,9 @@ install_oh_my_zsh() {
         print_info "Changing shell to zsh"
         execute "sudo chsh -s /bin/zsh" "Changed shell to zsh"
     fi
+
+    mkdir -p ${MY_ZSH}
+    print_info "Put custom scripts in ${MY_ZSH} and source them in .zshrc"
 }
 
 ################################################################################
