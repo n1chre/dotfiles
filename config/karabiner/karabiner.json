@@ -201,22 +201,6 @@
                         },
                         {
                             "from": {
-                                "key_code": "end"
-                            },
-                            "to": {
-                                "consumer_key_code": "play_or_pause"
-                            }
-                        },
-                        {
-                            "from": {
-                                "key_code": "home"
-                            },
-                            "to": {
-                                "key_code": "fn"
-                            }
-                        },
-                        {
-                            "from": {
                                 "key_code": "left_command"
                             },
                             "to": {
@@ -229,14 +213,6 @@
                             },
                             "to": {
                                 "key_code": "left_command"
-                            }
-                        },
-                        {
-                            "from": {
-                                "key_code": "page_down"
-                            },
-                            "to": {
-                                "consumer_key_code": "fastforward"
                             }
                         },
                         {
@@ -396,7 +372,7 @@
                         "key_code": "escape"
                     },
                     "to": {
-                        "key_code": "vk_none"
+                        "key_code": "fn"
                     }
                 }
             ],

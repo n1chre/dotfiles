@@ -6,3 +6,7 @@ powerlevel9k u 2 reda ?
 copy scm prompt
 
 pocinjemo vimrc
+
+
+install file for brew and brew-cask
+include everything in the git and previous install stuf
