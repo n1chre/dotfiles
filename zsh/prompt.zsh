@@ -1,11 +1,7 @@
 #!/bin/zsh
 
-# depends on zshrc, prompt.zsh, setup-machine.sh and setup-links
 MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
 
-# custom scm prompt
-
-#
 if git rev-parse &>/dev/null; then
   # standard vcs for git is better
   VCS=vcs

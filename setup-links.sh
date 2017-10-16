@@ -5,7 +5,6 @@ DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
 # shellcheck source=./util.sh disable=SC1091
 source "$DOTFILES/util.sh"
 
-# depends on zshrc, prompt.zsh, setup-machine.sh and setup-links
 MY_ZSH=.oh-my-zsh/custom/my_zsh
 
 print_info "Setting up symlinks"
@@ -23,6 +22,8 @@ link_smart git/gitignore .gitignore
 
 # link zsh stuff
 link_smart zsh/zshrc .zshrc
+link_smart zsh/zshenv .zshenv
 link_smart zsh ${MY_ZSH}
-# remove link to zshrc because we don't need it there
+# remove some links
 unlink ${HOME}/${MY_ZSH}/zshrc
+unlink ${HOME}/${MY_ZSH}/zshenv
