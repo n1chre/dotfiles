@@ -12,7 +12,8 @@ link_smart bin
 for ex in ${HOME}/bin; do chmod +rwx "${ex}"; done
 
 # symlink all .configs to ~/.config
-link_smart .config
+link_smart config .config
 
 # symlink everything in git to ~
-link_smart git ''
+link_smart git/gitconfig .gitconfig
+link_smart git/gitignore .gitignore

@@ -105,9 +105,6 @@
 	untrackedCache = true
 	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-[credential]
-	helper = osxkeychain
-
 [diff]
 	renames = copy
 	tool = vimdiff
