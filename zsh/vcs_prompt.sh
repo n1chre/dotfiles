@@ -24,23 +24,23 @@
 #   branches!
 #
 #   setopt PROMPT_SUBST
-#   source /path/to/scm-prompt
-#   export PS1='$(_scm_prompt)$USER@%m:%~%% '
+#   source /path/to/vcs-prompt
+#   export PS1='$(_vcs_prompt)$USER@%m:%~%% '
 #
 # To use from bash:
 #
-#   source /path/to/scm-prompt
-#   export PS1="\$(_scm_prompt)\u@\h:\W\$ "
+#   source /path/to/vcs-prompt
+#   export PS1="\$(_vcs_prompt)\u@\h:\W\$ "
 #
 #   NOTE! You *EITHER* need to single-quote the whole thing *OR* back-slash
 #   the $(...) (as above), but not both. Which one you use depends on if
 #   you need the rest of your PS1 to interpolate variables.
 #
-# You may additionally pass a format-string to the scm_info command. This
+# You may additionally pass a format-string to the vcs_info command. This
 # allows you to control the format of the prompt string without interfering
 # with the prompt outside of a mercurial or git repository. For example:
 #
-#   $(_scm_prompt "%s")
+#   $(_vcs_prompt "%s")
 #
 # The default format string is " (%s)" (note the space)
 #
@@ -69,7 +69,7 @@ _find_most_relevant_remotebookmark()
     command echo "$(command sort -r <<< "$1" | command head -n 1)"
 }
 
-_scm_prompt()
+_vcs_prompt()
 {
   local dir git hg fmt
   fmt=${1:-'%s'}
