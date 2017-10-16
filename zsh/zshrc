@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Source global definitions
 [ -f /etc/zshrc ] && source /etc/zshrc
 

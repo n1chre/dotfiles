@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # default umask
 umask 022
 

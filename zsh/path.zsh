@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # set up path
 PATH_DIRS=( \
   /usr/local/bin \

@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
 
 if git rev-parse &>/dev/null; then

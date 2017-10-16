@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # prefix it with space so these commands don't get saved to history
 alias cd=' cd'
 alias cp=' cp --backup=numbered'
