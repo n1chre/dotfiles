@@ -12,7 +12,6 @@ PATH_DIRS=( \
   /bin \
   /sbin \
   $HOME/bin \
-  $HOME/local \
 )
 unset PATH
 for DIR in ${PATH_DIRS}; do

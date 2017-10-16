@@ -97,9 +97,6 @@
 	old = red bold
 	whitespace = red reverse
 
-[commit]
-	gpgsign = true
-
 [core]
 	autocrlf = input
 	editor = vim
@@ -125,4 +122,9 @@
 
 [user]
 	name = Filip Hrenić
-	email = hrenic.filip@gmail.com
+    email = hrenic.filip@gmail.com
+
+# Load local config
+# this needs to be at the end of the file so above can be overwritten
+[include]
+    path = ~/.gitconfig.local
