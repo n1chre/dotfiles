@@ -3,13 +3,19 @@
 # this is ment to be run by cron
 
 # update oh-my-zsh
-cd "${HOME}/.oh-my-zsh" && upgrade_oh_my_zsh
+yes | sh "${HOME}/.oh-my-zsh/tools/upgrade.sh"
 
 # update powerlevel9k
 cd "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" && git pull --rebase
 
+cd "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" && git pull --rebase
+
 # update fuzzy finder
-cd "${HOME}/.fzf" && git pull && ./install
+cd "${HOME}/.fzf" && git pull && yes | ./install
 
 # update brew
-hash brew &>/dev/null && { brew update ; brew upgrade ; brew cleanup ; }
+if hash brew &>/dev/null; then
+  brew update
+  brew upgrade
+  brew cleanup
+fi
