@@ -7,7 +7,7 @@ MY_ZSH=${ZSH}/custom/my_zsh
 source ${MY_ZSH}/aliases.zsh
 source ${MY_ZSH}/history.zsh
 source ${MY_ZSH}/options.zsh
-source ${MY_ZSH}/path.zsh
+source ${MY_ZSH}/prompt.zsh
 
 source ${ZSH}/oh-my-zsh.sh
 

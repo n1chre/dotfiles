@@ -1,4 +1,4 @@
 MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
 
+source ${MY_ZSH}/path.zsh
 source ${MY_ZSH}/exports.zsh
-source ${MY_ZSH}/prompt.zsh
