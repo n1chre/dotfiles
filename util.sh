@@ -118,7 +118,7 @@ link_smart() {
 
     if [ -d "${source}" ]; then
         mkdir -p "${targetFile}"
-        for name in $(find "${source}" -depth 1); do
+        for name in $(find "${source}" -mindepth 1 -maxdepth 1); do
             link_ask "${name}" "${targetFile}/$(basename "${name}")"
         done
     else
