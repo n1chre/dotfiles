@@ -25,7 +25,7 @@ POWERLEVEL9K_HOME_ICON=''
 POWERLEVEL9K_HOME_SUB_ICON=''
 POWERLEVEL9K_FOLDER_ICON=''
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir ${VCS})
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time command_execution_time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs load time command_execution_time)
 POWERLEVEL9K_MODE='awesome-patched'
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
