@@ -1,10 +1,10 @@
 # prefix it with space so these commands don't get saved to history
 alias cd=' cd'
-alias cp=' cp --backup=numbered'
+alias cp=' cp'
 alias exit=' exit'
-alias ln=' ln --backup=numbered'
+alias ln=' ln'
 alias ls=' ls'
-alias mv=' mv -f --backup=numbered'
+alias mv=' mv'
 alias pwd=' pwd'
 
 alias grep='grep --color=auto'
