@@ -15,3 +15,7 @@ alias rm='rm -i'
 alias sz='source ~/.zshrc'
 alias sush='ssh -l root'
 alias tree='tree -CFupsha'
+
+# IP addresses
+alias ippub="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ippriv="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
