@@ -66,6 +66,15 @@ if [ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" ]; then
     print_info "url: https://github.com/powerline/fonts"
 fi
 
+# plugins
+if [ ! -d "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+              "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    print_success "Installed zsh-syntax-highlighting plugin"
+fi
+
+print_success "ZSH has been setup!!!"
+
 ################################################################################
 # Fuzzy finder                                                                 #
 ################################################################################
