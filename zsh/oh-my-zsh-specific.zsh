@@ -9,6 +9,6 @@ export ZSH_PLUGINS_ALIAS_TIPS_TEXT='Why not this? >> '
 plugins=(\
   alias-tips \
   colored-man-pages \
-  zsh-syntax-highlighting \
+  fast-syntax-highlighting \
   z \
 )
