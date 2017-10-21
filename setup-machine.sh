@@ -3,7 +3,8 @@
 # get utility functions
 source ./util.sh  # shellcheck disable=SC1091
 
-MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
+MY_ZSH=${HOME}/.zsh
+mkdir -p "${MY_ZSH}"
 
 ################################################################################
 # Helper functions                                                             #
@@ -38,7 +39,6 @@ install_oh_my_zsh() {
         execute "sudo chsh -s /bin/zsh" "Changed shell to zsh"
     fi
 
-    mkdir -p "${MY_ZSH}"
     print_info "Put custom scripts in ${MY_ZSH} and source them in .zshrc"
 }
 

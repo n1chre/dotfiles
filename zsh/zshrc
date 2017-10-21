@@ -2,7 +2,7 @@
 [ -f /etc/zshrc ] && source /etc/zshrc
 
 export ZSH="${HOME}/.oh-my-zsh"
-MY_ZSH=${ZSH}/custom/my_zsh
+MY_ZSH=${HOME}/.zsh
 
 source ${MY_ZSH}/aliases.zsh
 source ${MY_ZSH}/history.zsh

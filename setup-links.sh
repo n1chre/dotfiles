@@ -3,7 +3,7 @@
 # get utility functions
 source ./util.sh  # shellcheck disable=SC1091
 
-MY_ZSH=.oh-my-zsh/custom/my_zsh
+MY_ZSH=.zsh
 
 print_info "Setting up symlinks"
 

@@ -1,4 +1,4 @@
-MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
+MY_ZSH=${HOME}/.zsh
 
 if git rev-parse &>/dev/null; then
   # standard vcs for git is better
