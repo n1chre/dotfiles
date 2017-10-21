@@ -30,12 +30,3 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir ${VCS})
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs load time command_execution_time)
 POWERLEVEL9K_MODE='awesome-patched'
 ZSH_THEME="powerlevel9k/powerlevel9k"
-
-CASE_SENSITIVE="true"
-HYPHEN_INSENSITIVE="true"
-
-plugins=(\
-  colored-man-pages \
-  zsh-syntax-highlighting \
-  z \
-)

@@ -1,9 +1,13 @@
-zshrc do kraja
-zlogin ... ??
+TODO:
+  link_ask treba primati
+    $1 - put relativan prema dotfiles/
+    $2 - ako ga ima, onda je relativno prema ~
+    napravi link
 
-powerlevel9k u 2 reda ?
-
-pocinjemo vimrc
+  link_smart = isto, ali prvo napravi dir ako je $1 dir i onda polinkaj nutra
+  link_smart -> link_dir
 
 install file for brew and brew-cask
-include everything in the git and previous install stuf
+include everything in the git and previous install stuff
+plugins=(colored-man-pages docker docker-compose fast-syntax-highlighting git vagrant z zsh-dropbox)
+start vimrc

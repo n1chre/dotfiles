@@ -5,6 +5,10 @@ source ./util.sh  # shellcheck disable=SC1091
 
 MY_ZSH=${HOME}/.oh-my-zsh/custom/my_zsh
 
+################################################################################
+# Helper functions                                                             #
+################################################################################
+
 install_zsh() {
   # If zsh isn't installed, try to install it
   if [ "${OSX}" -eq 1 ]; then
@@ -38,6 +42,20 @@ install_oh_my_zsh() {
     print_info "Put custom scripts in ${MY_ZSH} and source them in .zshrc"
 }
 
+add_repo(){
+  # returns:
+  #   0 - added repo
+  #   1 - didn't add
+  local URL="$1"
+  local NAME=$(basename "${URL}")
+  if [ ! -d "./${NAME}" ]; then
+      git submodule add -f "$URL"
+      print_success "Installed ${NAME}"
+      return 0
+  fi
+  return 1
+}
+
 ################################################################################
 # ZSH                                                                          #
 ################################################################################
@@ -56,22 +74,29 @@ if [ ! -f /bin/zsh ]; then
 fi
 install_oh_my_zsh
 
-# install powerlevel9k theme
-if [ ! -d "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" ]; then
-    git clone https://github.com/bhilburn/powerlevel9k.git \
-              "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k"
-    print_success "Installed powerlevel9k theme"
-    print_info "Install font SourceCodePro for everything to work!"
-    print_info "url: https://github.com/adobe-fonts/source-code-pro"
-    print_info "url: https://github.com/powerline/fonts"
+pushd "${HOME}/.oh-my-zsh/custom" &>/dev/null
+
+# install theme
+cd themes
+if add_repo https://github.com/bhilburn/powerlevel9k; then
+  print_info "Install font SourceCodePro for everything to work!"
+  print_info "url: https://github.com/adobe-fonts/source-code-pro"
+  print_info "url: https://github.com/powerline/fonts"
+fi
+cd ..
+
+# install plugins
+cd plugins
+add_repo https://github.com/zsh-users/zsh-syntax-highlighting
+add_repo https://github.com/djui/alias-tips
+cd ..
+
+# if something was added, add it and commit it so that `git pull --rebase` works
+if [ -n "$(git status --porcelain)" ]; then
+  git add -A && git commit -avm '[auto] added themes and plugins as gitmodules'
 fi
 
-# plugins
-if [ ! -d "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-              "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-    print_success "Installed zsh-syntax-highlighting plugin"
-fi
+popd &>/dev/null  # return to previous directory
 
 print_success "ZSH has been setup!!!"
 
@@ -95,7 +120,7 @@ print_info "Setup cron"
 
 crontab -l > crontab.tmp
 if ! grep 'my-update.sh' crontab.tmp &>/dev/null ; then
-    echo "0 12 * * * ~/my-update.sh" >> crontab.tmp  # every day at noon
+    echo "0 12 * * 3 ~/my-update.sh" >> crontab.tmp  # every wednesday at noon
     crontab crontab.tmp
 fi
 rm -f crontab.tmp

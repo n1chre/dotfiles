@@ -2,13 +2,9 @@
 
 # this is ment to be run by cron
 
-# update oh-my-zsh
-yes | sh "${HOME}/.oh-my-zsh/tools/upgrade.sh"
-
-# update powerlevel9k
-cd "${HOME}/.oh-my-zsh/custom/themes/powerlevel9k" && git pull --rebase
-
-cd "${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" && git pull --rebase
+# update oh-my-zsh and all plugins and themes
+cd "${HOME}/.oh-my-zsh" && \
+git pull --recurse-submodules --rebase --stat origin master
 
 # update fuzzy finder
 cd "${HOME}/.fzf" && git pull && yes | ./install
