@@ -81,9 +81,7 @@ link_ask() {
     local targetFile=$2
     if [ ! -e "${targetFile}" ]; then
         execute "ln -fs ${sourceFile} ${targetFile}" "${targetFile} → ${sourceFile}"
-    elif [ "$(readlink "${targetFile}")" = "${sourceFile}" ]; then
-        print_success "${targetFile} → ${sourceFile}"
-    else
+    elif [ "$(readlink "${targetFile}")" != "${sourceFile}" ]; then
         if ask "'${targetFile}' already exists, do you want to overwrite it?"
         then
             local backupFile=${backup}${targetFile}

@@ -4,7 +4,8 @@
 # shellcheck disable=SC1091 disable=SC2164 disable=SC2103
 source ./util.sh
 
-MY_ZSH=${HOME}/.zsh
+MY_ZSH_RELATIVE='.zsh'
+MY_ZSH="${HOME}/${MY_ZSH_RELATIVE}"
 mkdir -p "${MY_ZSH}"
 
 ################################################################################
@@ -129,10 +130,30 @@ fi
 rm -f crontab.tmp
 
 ################################################################################
-# Finish                                                                       #
+# Symlinks                                                                     #
 ################################################################################
 
-# set up symlinks and start using it
-"$DOTFILES/setup-links.sh"
+print_info "Setting up symlinks"
+
+# symlink bin to ~/bin and make them executable
+link_smart bin
+for ex in ${HOME}/bin; do chmod +rwx "${ex}"; done
+
+# symlink all .configs to ~/.config
+link_smart config .config
+
+# symlink everything in git to ~
+link_smart git/gitconfig .gitconfig
+link_smart git/gitignore .gitignore
+
+# link zsh stuff
+link_smart zsh/zshrc .zshrc
+link_smart zsh/zshenv .zshenv
+link_smart zsh "${MY_ZSH_RELATIVE}"
+# remove some links
+unlink "${HOME}/${MY_ZSH_RELATIVE}/zshrc"
+unlink "${HOME}/${MY_ZSH_RELATIVE}/zshenv"
+
+# DONE!!!
 print_success "All done!"
 print_info "execute \$ source ~/.zshrc"
