@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # get utility functions
-source ./util.sh  # shellcheck disable=SC1091
+# shellcheck disable=SC1091 disable=SC2164 disable=SC2103
+source ./util.sh
 
 MY_ZSH=${HOME}/.zsh
 mkdir -p "${MY_ZSH}"
@@ -47,9 +48,10 @@ add_repo(){
   #   0 - added repo
   #   1 - didn't add
   local URL="$1"
-  local NAME=$(basename "${URL}")
+  local NAME
+  NAME=$(basename "${URL}")
   if [ ! -d "./${NAME}" ]; then
-      git submodule add -f "$URL"
+      git submodule add -f "$URL" &>/dev/null
       print_success "Installed ${NAME}"
       return 0
   fi

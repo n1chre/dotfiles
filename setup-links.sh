@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # get utility functions
-source ./util.sh  # shellcheck disable=SC1091
+# shellcheck disable=SC1091
+source ./util.sh
 
 MY_ZSH=.zsh
 
