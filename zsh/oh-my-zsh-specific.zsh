@@ -10,5 +10,6 @@ plugins=(\
   alias-tips \
   colored-man-pages \
   fast-syntax-highlighting \
+  zsh-autosuggestions \
   z \
 )
