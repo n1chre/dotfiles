@@ -87,8 +87,8 @@ cd ..
 
 # install plugins
 cd plugins
-add_repo https://github.com/zsh-users/zsh-syntax-highlighting
 add_repo https://github.com/djui/alias-tips
+add_repo https://github.com/zsh-users/zsh-syntax-highlighting
 cd ..
 
 # if something was added, add it and commit it so that `git pull --rebase` works
