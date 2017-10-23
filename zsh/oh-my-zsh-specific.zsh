@@ -10,6 +10,12 @@ plugins=(\
   alias-tips \
   colored-man-pages \
   fast-syntax-highlighting \
+  sudo \
+  web-search \
   zsh-autosuggestions \
   z \
 )
+
+if [ "$(uname -s)" = "Darwin" ]; then
+    plugins+=(osx)
+fi
