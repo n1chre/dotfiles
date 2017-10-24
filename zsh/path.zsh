@@ -1,4 +1,15 @@
 # set up path
+
+function append_path {
+  if [ -d "${1}" ]; then
+    if [[ ${PATH} != *:${1}:* ]] && \
+       [[ ${PATH} != ${1}:*   ]] && \
+       [[ ${PATH} != *:${1}   ]]; then
+      PATH="$PATH:${1}"
+    fi
+  fi
+}
+
 PATH_DIRS=( \
   /usr/local/bin \
   /usr/local/sbin \
@@ -8,11 +19,8 @@ PATH_DIRS=( \
   /sbin \
   $HOME/bin \
 )
-unset PATH
-for DIR in ${PATH_DIRS}; do
-	if [ -d "${DIR}" ]; then
-    	PATH=$PATH:${DIR}
-	fi
-done
+PATH=
+for DIR in ${PATH_DIRS}; do append_path ${DIR}; done
 export PATH=${PATH:1}
 unset PATH_DIRS
+# disable path_helper on mac in /etc/zprofile for magic rewriting of this
