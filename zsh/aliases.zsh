@@ -3,7 +3,7 @@ alias cd=' cd'
 alias cp=' cp'
 alias exit=' exit'
 alias ln=' ln'
-alias ls=' ls'
+alias ls=' ls -G'
 alias mv=' mv'
 alias pwd=' pwd'
 
