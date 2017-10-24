@@ -4,6 +4,10 @@ DISABLE_AUTO_UPDATE="true"
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="true"
 
+# see .oh-my-zsh/lib/clipboard.zsh
+alias ctrlc='clipcopy'
+alias ctrlv='clippaste'
+
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT='Why not this? >> '
 
 plugins=(\
