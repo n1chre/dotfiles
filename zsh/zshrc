@@ -4,13 +4,14 @@
 export ZSH="${HOME}/.oh-my-zsh"
 MY_ZSH=${HOME}/.zsh
 
+source ${MY_ZSH}/oh-my-zsh-specific.zsh
+source ${ZSH}/oh-my-zsh.sh
+
+# my options
 source ${MY_ZSH}/aliases.zsh
 source ${MY_ZSH}/history.zsh
 source ${MY_ZSH}/options.zsh
 source ${MY_ZSH}/prompt.zsh
-source ${MY_ZSH}/oh-my-zsh-specific.zsh
-
-source ${ZSH}/oh-my-zsh.sh
 
 # any local settings ?
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
