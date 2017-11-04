@@ -124,7 +124,7 @@ print_info "Setup cron"
 
 crontab -l > crontab.tmp
 if ! grep 'my-update.sh' crontab.tmp &>/dev/null ; then
-    echo "0 12 * * 3 ~/my-update.sh" >> crontab.tmp  # every wednesday at noon
+    echo "0 12 * * 3 ~/bin/my-update.sh" >> crontab.tmp  # every wednesday at noon
     crontab crontab.tmp
 fi
 rm -f crontab.tmp
