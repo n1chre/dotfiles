@@ -67,27 +67,27 @@ cmd_exists() {
   fi
 }
 
-execute() {
-  if $1 &> /dev/null; then
-      print_success "${2:-$1}"
-  else
-      print_error "${2:-$1}"
-  fi
-}
-
 link_ask() {
     [ $# -eq 2 ] || false
     local sourceFile=$1
     local targetFile=$2
     if [ ! -e "${targetFile}" ]; then
-        execute "ln -fs ${sourceFile} ${targetFile}" "${targetFile} → ${sourceFile}"
+        if ln -fs "${sourceFile}" "${targetFile}"; then
+          print_success "${targetFile} → ${sourceFile}"
+        else
+          print_error "${targetFile} → ${sourceFile}"
+        fi
     elif [ "$(readlink "${targetFile}")" != "${sourceFile}" ]; then
         if ask "'${targetFile}' already exists, do you want to overwrite it?"
         then
             local backupFile=${backup}${targetFile}
             mkdir -p "$(dirname "${backupFile}")"
             mv "${targetFile}" "${backupFile}" && print_info "Backed up to ${backupFile}"
-            execute "ln -fs ${sourceFile} ${targetFile}" "${targetFile} → ${sourceFile}"
+            if ln -fs "${sourceFile}" "${targetFile}"; then
+              print_success "${targetFile} → ${sourceFile}"
+            else
+              print_error "${targetFile} → ${sourceFile}"
+            fi
         else
             print_error "${targetFile} → ${sourceFile}"
         fi
