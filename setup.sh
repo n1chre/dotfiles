@@ -154,6 +154,11 @@ link_smart zsh "${MY_ZSH_RELATIVE}"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshrc"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshenv"
 
+if [ "${OSX}" -eq 1 ]; then
+  mkdir -p "${HOME}/Library/Application Support/Spectacle"
+  link_smart files/spectacle.json "Library/Application Support/Spectacle/Shortcuts.json"
+fi
+
 # DONE!!!
 print_success "All done!"
 print_info "execute \$ source ~/.zshrc"
