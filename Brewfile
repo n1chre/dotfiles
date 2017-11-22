@@ -62,6 +62,8 @@ brew "wget"
 brew "youtube-dl"
 brew "zsh"
 
+brew "eddieantonio/eddieantonio/imgcat"
+
 cask_args appdir: '/Applications'
 cask "atom"
 cask "dropbox"
