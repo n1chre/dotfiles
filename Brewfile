@@ -3,17 +3,18 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 
 # gnu stuff
-brew "coreutils", args: ["with-default-names"]
-brew "diffutils", args: ["with-default-names"]
+brew "coreutils"
+brew "diffutils"
 brew "findutils", args: ["with-default-names"]
-brew "gnu-getopt", args: ["with-default-names"]
+brew "gnu-getopt"
 brew "gnu-indent", args: ["with-default-names"]
 brew "gnu-sed", args: ["with-default-names"]
 brew "gnu-tar", args: ["with-default-names"]
 brew "gnu-time", args: ["with-default-names"]
 brew "gnu-which", args: ["with-default-names"]
-brew "gnutls", args: ["with-default-names"]
+brew "gnutls"
 brew "grep", args: ["with-default-names"]
+brew "make", args: ["with-default-names"]
 
 brew 'gpg'
 brew 'gpg2'
@@ -30,7 +31,6 @@ brew "git"
 brew "htop"
 brew "jq"
 brew "less"
-brew "make"
 brew "mtr"
 brew "m-cli"
 brew "perl"
@@ -49,11 +49,12 @@ brew "wget"
 brew "youtube-dl"
 brew "zsh"
 
+cask_args appdir: '/Applications'
 cask "atom"
 cask "dropbox"
 cask "flux"
 cask "google-chrome"
-cask "gpgtools"
+cask "gpg-suite"
 cask "karabiner"
 cask "lastpass"
 cask "ngrok"
