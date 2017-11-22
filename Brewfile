@@ -61,3 +61,7 @@ cask "ngrok"
 cask "spectacle"
 cask "spotify"
 cask "spotmenu"
+
+cask 'caskroom/fonts/font-hack'
+cask 'caskroom/fonts/font-source-code-pro-for-powerline'
+cask 'caskroom/fonts/font-source-code-pro'
