@@ -28,7 +28,45 @@ function prepend_manpath {
   fi
 }
 
-PATH_DIRS=( \
+function append_unique {
+  if is_dir_and_not_in "${1}" "${2}"; then
+    echo "${2}:${1}"
+  else
+    echo "${2}"
+  fi
+}
+
+function build_path {
+  local path_file=$1; shift
+  local path_dir=$1; shift
+  local path=''
+
+  for d in $@; do
+    path=$(append_unique "${d}" "${path}")
+  done
+
+  if [ -f ${path_file} ]; then
+    for d in $(/bin/cat ${path_file}); do
+      path=$(append_unique "${d}" "${path}")
+    done
+  fi
+
+  if [ -d ${path_dir} ]; then
+    for path_d in $(/bin/ls ${path_dir}); do
+      for d in $(/bin/cat "${path_dir}/${path_d}"); do
+        path=$(append_unique "${d}" "${path}")
+      done
+    done
+  fi
+
+  echo $path
+}
+
+# ============================================================================ #
+# set up PATH                                                                  #
+# ============================================================================ #
+
+PATH=$(build_path /etc/paths /etc/paths.d \
   /usr/local/bin \
   /usr/local/sbin \
   /usr/bin \
@@ -37,11 +75,16 @@ PATH_DIRS=( \
   /sbin \
   $HOME/bin \
 )
-PATH=
-for DIR in ${PATH_DIRS}; do append_path ${DIR}; done
-
-# export them
 export PATH=${PATH:1}
-export MANPATH
-unset PATH_DIRS
-# disable path_helper on mac in /etc/zprofile for magic rewriting of this
+
+# ============================================================================ #
+# set up MANPATH                                                               #
+# ============================================================================ #
+
+MANPATH=$(build_path /etc/manpaths /etc/manpaths.d \
+)
+export MANPATH=${MANPATH:1}
+
+# unset some helpers
+unset append_unique
+unset build_path
