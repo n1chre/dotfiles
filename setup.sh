@@ -156,10 +156,12 @@ link_smart git/gitignore .gitignore
 # link zsh stuff
 link_smart zsh/zshrc .zshrc
 link_smart zsh/zshenv .zshenv
+link_smart zsh/zprofile .zprofile
 link_smart zsh "${MY_ZSH_RELATIVE}"
 # remove some links
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshrc"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshenv"
+unlink "${HOME}/${MY_ZSH_RELATIVE}/zprofile"
 
 if [ "${OSX}" -eq 1 ]; then
   print_info "Setting up MacOS specific stuff"
