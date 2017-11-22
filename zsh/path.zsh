@@ -39,7 +39,6 @@ PATH_DIRS=( \
 )
 PATH=
 for DIR in ${PATH_DIRS}; do append_path ${DIR}; done
-MANPATH=
 
 # export them
 export PATH=${PATH:1}
