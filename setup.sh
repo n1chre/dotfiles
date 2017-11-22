@@ -131,10 +131,11 @@ rm -f crontab.tmp
 
 ################################################################################
 # Brew                                                                         #
+################################################################################
 
 if [[ "${OSX}" = 1 ]] && ask "Run brew bundle to install stuff from Brewfile?"
 then
-  brew bundle --file-path="${DOTFILES}/Brewfile"
+  brew bundle --file="${DOTFILES}/Brewfile"
 fi
 
 ################################################################################

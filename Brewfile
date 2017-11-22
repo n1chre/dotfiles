@@ -51,6 +51,7 @@ brew "zsh"
 
 cask "atom"
 cask "dropbox"
+cask "flux"
 cask "google-chrome"
 cask "gpgtools"
 cask "karabiner"
