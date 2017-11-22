@@ -130,6 +130,13 @@ fi
 rm -f crontab.tmp
 
 ################################################################################
+# Miscellaneous                                                                #
+################################################################################
+
+# hush logins
+touch "${HOME}/.hushlogin"
+
+################################################################################
 # Symlinks                                                                     #
 ################################################################################
 
@@ -155,6 +162,8 @@ unlink "${HOME}/${MY_ZSH_RELATIVE}/zshrc"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshenv"
 
 if [ "${OSX}" -eq 1 ]; then
+  print_info "Setting up MacOS specific stuff"
+  # Spectacle
   mkdir -p "${HOME}/Library/Application Support/Spectacle"
   link_smart files/spectacle.json "Library/Application Support/Spectacle/Shortcuts.json"
 fi
