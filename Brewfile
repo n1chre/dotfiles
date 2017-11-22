@@ -1,6 +1,7 @@
 tap "caskroom/cask"
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "osx-cross/avr"
 
 # gnu stuff
 brew "coreutils"
@@ -24,17 +25,22 @@ brew 'pinentry-mac'
 brew "gnupg", args: ["with-default-names"]
 brew 'gnupg2', args: ["with-default-names"]
 
+brew "avr-libc"
 brew "bash"
 brew "cask"
 brew "colordiff"
 brew "curl"
 brew "fd"
 brew "gawk"
+brew "gcc"
+brew "cmake"
+brew "ffmpeg"
 brew "git"
 brew "gradle"
 brew "htop"
 brew "jq"
 brew "less"
+brew "lesspipe"
 brew "mtr"
 brew "mosh"
 brew "m-cli"
