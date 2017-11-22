@@ -130,6 +130,14 @@ fi
 rm -f crontab.tmp
 
 ################################################################################
+# Brew                                                                         #
+
+if [[ "${OSX}" = 1 ]] && ask "Run brew bundle to install stuff from Brewfile?"
+then
+  brew bundle --file-path="${DOTFILES}/Brewfile"
+fi
+
+################################################################################
 # Miscellaneous                                                                #
 ################################################################################
 
@@ -163,9 +171,9 @@ unlink "${HOME}/${MY_ZSH_RELATIVE}/zshrc"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zshenv"
 unlink "${HOME}/${MY_ZSH_RELATIVE}/zprofile"
 
-if [ "${OSX}" -eq 1 ]; then
+if [[ "${OSX}" = 1 ]]; then
   print_info "Setting up MacOS specific stuff"
-  # Spectacle
+  # Spectacle config
   mkdir -p "${HOME}/Library/Application Support/Spectacle"
   link_smart files/spectacle.json "Library/Application Support/Spectacle/Shortcuts.json"
 fi

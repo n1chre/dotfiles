@@ -5,6 +5,7 @@
 
 # get dotfiles directory
 DOTFILES="$(cd "$(dirname "$0")" || exit 1; pwd -P)"
+export DOTFILES
 
 # set os
 if [ "$(uname -s)" = "Darwin" ]; then
@@ -39,7 +40,7 @@ print_success() {
 # asking for stuff
 
 ask() {
-  print_question "$1 (y/n) "
+  print_question "$1 (y/[n]) "
   read -r answer
   case ${answer} in
     [Yy]* ) true ;;
