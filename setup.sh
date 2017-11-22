@@ -177,6 +177,10 @@ if [[ "${OSX}" = 1 ]]; then
   # Spectacle config
   mkdir -p "${HOME}/Library/Application Support/Spectacle"
   link_smart files/spectacle.json "Library/Application Support/Spectacle/Shortcuts.json"
+
+  # gnupg
+  mkdir -p "${HOME}/.gnupg"
+  link_smart files/gpg-agent.conf .gnupg/gpg-agent.conf
 fi
 
 # DONE!!!
