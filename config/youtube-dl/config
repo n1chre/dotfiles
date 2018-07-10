@@ -1,9 +1,18 @@
-# Extract audio in mp3 format
+--ignore-errors
+--mark-watched
+
+# Filesystem options
+--output '%(title)s.%(ext)s'
+--restrict-filenames  # ascii only
+--no-mtime
+
+--user-agent 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
+
 --extract-audio
---audio-format=mp3
+--audio-format mp3
+--format bestaudio
 
-# Best audio quality
---audio-quality 0
+--embed-thumbnail
 
-# Template for files
--o '%(title)s.%(ext)s'
+--prefer-ffmpeg
+--hls-prefer-ffmpeg

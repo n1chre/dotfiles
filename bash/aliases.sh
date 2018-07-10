@@ -20,6 +20,7 @@ alias py3='python3'
 alias rm='rm -i'
 alias sush='ssh -l root'
 alias tree='tree -CFupsha'
+alias yt='youtube-dl'
 
 # IP addresses
 alias ippub="dig +short myip.opendns.com @resolver1.opendns.com"

@@ -37,9 +37,9 @@ function append_unique {
 }
 
 function build_path {
+  local path="$1"; shift
   local path_file=$1; shift
   local path_dir=$1; shift
-  local path=''
 
   for d in $@; do
     path=$(append_unique "${d}" "${path}")
@@ -66,7 +66,7 @@ function build_path {
 # set up PATH                                                                  #
 # ============================================================================ #
 
-PATH=$(build_path /etc/paths /etc/paths.d \
+export PATH=$(build_path "$PATH" /etc/paths /etc/paths.d \
   /usr/local/bin \
   /usr/local/sbin \
   /usr/bin \
@@ -75,15 +75,13 @@ PATH=$(build_path /etc/paths /etc/paths.d \
   /sbin \
   $HOME/bin \
 )
-export PATH=${PATH:1}
 
 # ============================================================================ #
 # set up MANPATH                                                               #
 # ============================================================================ #
 
-MANPATH=$(build_path /etc/manpaths /etc/manpaths.d \
+export MANPATH=$(build_path "$MANPATH" /etc/manpaths /etc/manpaths.d \
 )
-export MANPATH=${MANPATH:1}
 
 # unset some helpers
 unset append_unique
