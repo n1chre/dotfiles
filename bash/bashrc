@@ -50,7 +50,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[ -f ~/.local ] && source ~/.local
+[ -f ~/.local.bash ] && source ~/.local.bash
 
 # FUZZY FINDER <3
 
