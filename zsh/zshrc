@@ -18,7 +18,7 @@ source ${MY_ZSH}/options.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # source fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $DOTFILES/shell/fzf.sh
 
 export PATH="$(cleanup_path $PATH)"
 export MANPATH="$(cleanup_path $MANPATH)"
