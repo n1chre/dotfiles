@@ -1,3 +1,7 @@
+source $DOTFILES/shell/history.sh
+
+# zsh specific under this
+
 # The path to the history file.
 export HISTFILE="${HOME}/.zsh_history"
 # The maximum number of events to save in the internal history.

@@ -1,4 +1,4 @@
-# set up path
+# set up PATH and MANPATH variables
 
 function is_dir_and_not_in {
   [[ -d ${1} ]] && [[ ${2} != *:${1}:* ]] && [[ ${2} != ${1}:* ]] && [[ ${2} != *:${1} ]]
@@ -6,25 +6,25 @@ function is_dir_and_not_in {
 
 function append_path {
   if is_dir_and_not_in "${1}" "${PATH}"; then
-    PATH="${PATH}:${1}"
+    export PATH="${PATH}:${1}"
   fi
 }
 
 function prepend_path {
   if is_dir_and_not_in "${1}" "${PATH}"; then
-    PATH="${1}:${PATH}"
+    export PATH="${1}:${PATH}"
   fi
 }
 
 function append_manpath {
   if is_dir_and_not_in "${1}" "${MANPATH}"; then
-    MANPATH="${MANPATH}:${1}"
+    export MANPATH="${MANPATH}:${1}"
   fi
 }
 
 function prepend_manpath {
   if is_dir_and_not_in "${1}" "${MANPATH}"; then
-    MANPATH="${1}:${MANPATH}"
+    export MANPATH="${1}:${MANPATH}"
   fi
 }
 
@@ -39,7 +39,7 @@ function append_unique {
 function build_path {
   local path_file=$1; shift
   local path_dir=$1; shift
-  local path=''
+  local path=$1; shift
 
   for d in $@; do
     path=$(append_unique "${d}" "${path}")
@@ -62,11 +62,30 @@ function build_path {
   echo $path
 }
 
+function cleanup_path {
+  # remove duplicates from path
+  local path=$1;
+  if [ -n "$path" ]; then
+    local old_path=$path:
+    path=
+    while [ -n "$old_path" ]; do
+      local x=${old_path%%:*} # the first remaining entry
+      case $path: in
+        *:"$x":*) ;;          # already there
+        *) path=$path:$x;;    # not there yet
+      esac
+      old_path=${old_path#*:}
+    done
+    path=${path#:}
+  fi
+  echo $path
+}
+
 # ============================================================================ #
 # set up PATH                                                                  #
 # ============================================================================ #
 
-PATH=$(build_path /etc/paths /etc/paths.d \
+export PATH=$(build_path /etc/paths /etc/paths.d "${PATH}" \
   /usr/local/bin \
   /usr/local/sbin \
   /usr/bin \
@@ -75,15 +94,13 @@ PATH=$(build_path /etc/paths /etc/paths.d \
   /sbin \
   $HOME/bin \
 )
-export PATH=${PATH:1}
 
 # ============================================================================ #
 # set up MANPATH                                                               #
 # ============================================================================ #
 
-MANPATH=$(build_path /etc/manpaths /etc/manpaths.d \
+export MANPATH=$(build_path /etc/manpaths /etc/manpaths.d "${MANPATH}"\
 )
-export MANPATH=${MANPATH:1}
 
 # unset some helpers
 unset append_unique

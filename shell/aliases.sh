@@ -7,15 +7,20 @@ alias ls=' ls --color'
 alias mv=' mv'
 alias pwd=' pwd'
 
+# interactive rm
+alias rm='rm -i'
+
+# grep use color
 alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias sudo='sudo '
+alias sush='ssh -l root'
+
 alias path='echo -e ${PATH//:/\\n}'
+
 alias py='python'
 alias py3='python3'
-alias rm='rm -i'
-alias sz='source ~/.zshrc'
-alias sush='ssh -l root'
-alias tree='tree -CFupsha'
 
-# IP addresses
-alias ippub="dig +short myip.opendns.com @resolver1.opendns.com"
-alias ippriv="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+alias tree='tree -CFupsha'

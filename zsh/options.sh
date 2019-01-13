@@ -1,10 +1,6 @@
-# default umask
-umask 022
+source $DOTFILES/shell/options.sh
 
-# fail if any command in pipe fails, not only last one
-set -o pipefail
-# vi key bindings
-set -o vi
+# zsh specific under this
 
 # don't beep on error
 setopt no_beep
@@ -16,3 +12,5 @@ setopt auto_cd
 setopt pushd_ignore_dups
 # no spelling correction
 unsetopt correct_all
+#allow tab completion in the middle of a word
+setopt complete_in_word

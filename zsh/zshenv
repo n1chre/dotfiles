@@ -1,11 +1,4 @@
-MY_ZSH=${HOME}/.zsh
+export DOTFILES=$HOME/dotfiles
 
-source ${MY_ZSH}/path.zsh
-source ${MY_ZSH}/exports.zsh
-
-if [ "$(uname -s)" = "Darwin" ]; then
-  # MacOS path setup
-  COREUTILS_PATH="$(brew --prefix coreutils)/libexec/gnubin"
-  prepend_path ${COREUTILS_PATH}
-  prepend_manpath ${COREUTILS_PATH}
-fi
+source $DOTFILES/zsh/path.sh
+source $DOTFILES/zsh/exports.sh

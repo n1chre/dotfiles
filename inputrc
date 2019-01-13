@@ -1,0 +1,6 @@
+"\C-r": reverse-search-history
+"\C-s": forward-search-history
+set editing-mode vi
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\C-w": backward-delete-word

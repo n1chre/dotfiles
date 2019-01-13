@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Don't use this, not ready yet. Old version"
+exit
+
 # get utility functions
 # shellcheck disable=SC1091 disable=SC2164 disable=SC2103
 source ./util.sh
