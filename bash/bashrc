@@ -1,7 +1,7 @@
 # Source global definitions
 [ -f /etc/bashrc ] && source /etc/bashrc
 
-export DOTFILES=/Users/hrenic/dotfiles
+export DOTFILES=${HOME}/dotfiles
 MY_BASH=${DOTFILES}/bash
 
 source ${MY_BASH}/path.sh
@@ -11,13 +11,15 @@ source ${MY_BASH}/aliases.sh
 source ${MY_BASH}/completion.sh
 source ${MY_BASH}/history.sh
 source ${MY_BASH}/options.sh
-source ${MY_BASH}/prompt.sh
 
 # any local settings ?
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 # source fuzzy finder
 source $DOTFILES/shell/fzf.sh
+
+# now set up prompt
+source ${MY_BASH}/prompt.sh
 
 export PATH="$(cleanup_path $PATH)"
 export MANPATH="$(cleanup_path $MANPATH)"
