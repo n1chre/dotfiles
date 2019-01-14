@@ -8,7 +8,7 @@ setopt PROMPT_SUBST
 #   # standard vcs for git is better
 #   VCS=vcs
 # else
-#   # fb scm prompt is better for hg
+#   fb scm prompt is better for hg
 #   POWERLEVEL9K_CUSTOM_VCS="_vcs_prompt"
 #   POWERLEVEL9K_CUSTOM_VCS_BACKGROUND="yellow"
 #   POWERLEVEL9K_CUSTOM_VCS_FOREGROUND="black"
@@ -16,6 +16,9 @@ setopt PROMPT_SUBST
 # fi
 
 # TODO: figure out how to do the above, use vcs based on repo
+POWERLEVEL9K_CUSTOM_VCS="_vcs_prompt"
+POWERLEVEL9K_CUSTOM_VCS_BACKGROUND="yellow"
+POWERLEVEL9K_CUSTOM_VCS_FOREGROUND="black"
 VCS=custom_vcs
 
 # setup theme

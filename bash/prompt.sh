@@ -61,7 +61,7 @@ PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] in ";
 PS1+="\[${green}\]\w"; # working directory full path
 PS1+="${blue}\$(_vcs_prompt)"
-PS1+="${yellow}\D{%T}"
+PS1+="${yellow} \D{%T}"
 PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;

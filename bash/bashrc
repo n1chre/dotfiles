@@ -1,98 +1,23 @@
+# Source global definitions
 [ -f /etc/bashrc ] && source /etc/bashrc
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+export DOTFILES=/Users/hrenic/dotfiles
+MY_BASH=${DOTFILES}/bash
 
-MY_BASH="${HOME}/.bash"
+source ${MY_BASH}/path.sh
+source ${MY_BASH}/exports.sh
 
-source "${MY_BASH}/path.sh"
-source "${MY_BASH}/exports.sh"
-source "${MY_BASH}/aliases.sh"
-source "${MY_BASH}/prompt.sh"
+source ${MY_BASH}/aliases.sh
+source ${MY_BASH}/completion.sh
+source ${MY_BASH}/history.sh
+source ${MY_BASH}/options.sh
+source ${MY_BASH}/prompt.sh
 
-eval $(dircolors ${MY_BASH}/dircolors)
+# any local settings ?
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
-# default umask
-umask 022
+# source fuzzy finder
+source $DOTFILES/shell/fzf.sh
 
-# fail if any command in pipe fails, not only last one
-set -o pipefail
-# vi key bindings
-set -o vi
-
-# history
-shopt -s histappend
-HISTCONTROL=ignoreboth
-HISTSIZE=1000000
-HISTFILESIZE=1000000
-
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
-
-
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-[ -f ~/.local.bash ] && source ~/.local.bash
-
-# FUZZY FINDER <3
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-export FZF_DEFAULT_COMMAND='ag -U --hidden --ignore .git -g ""'
-export FZF_DEFAULT_OPTS='--bind "F1:toggle-preview" --preview "rougify {} 2> /dev/null || cat {} 2> /dev/null || tree -C {} 2> /dev/null | head -100" --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
---color info:150,prompt:110,spinner:150,pointer:167,marker:174'
-
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-fe() {
-  local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-}
-
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
-# fkill - kill process
-fkill() {
-  local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]
-  then
-    echo $pid | xargs kill -${1:-9}
-  fi
-}
-
-# fcoc - checkout git commit
-fcoc() {
-  local commits commit
-  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
-  commit=$(echo "$commits" | fzf --tac +s +m -e) &&
-  git checkout $(echo "$commit" | sed "s/ .*//")
-}
-
+export PATH="$(cleanup_path $PATH)"
+export MANPATH="$(cleanup_path $MANPATH)"

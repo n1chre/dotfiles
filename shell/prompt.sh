@@ -1,1 +1,1 @@
-source $(dirname $0)/vcs_prompt.sh
+source $DOTFILES/shell/vcs_prompt.sh

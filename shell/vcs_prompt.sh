@@ -72,7 +72,7 @@ _find_most_relevant_remotebookmark()
 _vcs_prompt()
 {
   local dir git hg fmt
-  fmt=${1:-'%s'}
+  fmt=${1:-' %s'}
 
   # comment this to not use icons
   local USE_ICONS
