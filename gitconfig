@@ -123,9 +123,9 @@
 
 [user]
 	name = Filip Hrenić
-  email = hrenic.filip@gmail.com
+	email = hrenic.filip@gmail.com
 
-# Load local config
+# Load local config (if it exists)
 # this needs to be at the end of the file so above can be overwritten
 [include]
-  path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
