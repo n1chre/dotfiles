@@ -23,4 +23,5 @@ alias path='echo -e ${PATH//:/\\n}'
 alias py='python'
 alias py3='python3'
 
-alias tree='tree -CFupsha'
+alias tree="tree -CFupsha -I '.git|.hg'"
+
