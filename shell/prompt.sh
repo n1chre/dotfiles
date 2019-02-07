@@ -1,1 +1,1 @@
-source $DOTFILES/shell/vcs_prompt.sh
+source $DOTFILES/shell/scm_prompt.sh
