@@ -6,19 +6,13 @@ if [[ "${current_shell}" = *bash ]]; then
 elif [[ "${current_shell}" = *zsh ]]; then
   FZF_FILE=~/.fzf.zsh
 else
-  echo "Unknown shell: ${current_shell}"
-  return
+  FZF_FILE=
 fi
-unset current_shell
 
-if [ ! -f ${FZF_FILE} ]; then
-  "${FZF_FILE} doesn't exist, reinstall fzf?"
-  unset FZF_FILE
-  return
-fi
+[ ! -f ${FZF_FILE} ] && unset FZF_FILE current_shell ; return
 
 source $FZF_FILE
-unset FZF_FILE
+unset FZF_FILE current_shell
 
 export FZF_DEFAULT_COMMAND='ag -U --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='--bind "F1:toggle-preview" --preview "rougify {} 2> /dev/null || cat {} 2> /dev/null || tree -C {} 2> /dev/null | head -100" --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
