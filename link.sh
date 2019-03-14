@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DOTFILES="~/dotfiles"
+DOTFILES="${HOME}/dotfiles"
 
 ln -fs "${DOTFILES}/bash/bashrc" ~/.bashrc
 ln -fs "${DOTFILES}/gitconfig" ~/.gitconfig
