@@ -14,8 +14,8 @@ setopt bang_hist
 setopt extended_history
 # Write to the history file immediately, not when the shell exits.
 setopt inc_append_history
-# Don't share history between all sessions.
-unsetopt share_history
+# Share history between all sessions.
+setopt share_history
 # Expire a duplicate event first when trimming history.
 setopt hist_expire_dups_first
 # Do not record an event that was just recorded again.
