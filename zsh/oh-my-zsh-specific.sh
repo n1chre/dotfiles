@@ -7,7 +7,7 @@ HYPHEN_INSENSITIVE="true"
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT='Why not this? >> '
 
 plugins=(\
-  alias-tips \
+  # alias-tips \
   colored-man-pages \
   fast-syntax-highlighting \
   sudo \

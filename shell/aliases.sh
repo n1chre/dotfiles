@@ -1,10 +1,7 @@
 # prefix it with space so these commands don't get saved to history
 alias cd=' cd'
-alias cp=' cp'
 alias exit=' exit'
-alias ln=' ln'
 alias ls=' ls --color'
-alias mv=' mv'
 alias pwd=' pwd'
 
 # interactive rm
@@ -24,4 +21,3 @@ alias py='python'
 alias py3='python3'
 
 alias tree="tree -CFupsha -I '.git|.hg'"
-
