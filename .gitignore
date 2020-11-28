@@ -2,6 +2,8 @@
 # it is used for storing overwritten files/folders
 backup
 
+Brewfile.lock.json
+
 
 # Created by https://www.gitignore.io/api/macos,linux
 # Edit at https://www.gitignore.io/?templates=macos,linux
