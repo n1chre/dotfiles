@@ -1,7 +1,7 @@
 # dotfiles
 ## My dotfiles
 
-Need to add how to setup correctly, but tl;dr
+Need to add how to setup correctly, but tl;dr 
 ```
 clone into ~/dotfiles
 link ~/.zshrc to dotfiles/zsh/zshrc (similar for bash)
