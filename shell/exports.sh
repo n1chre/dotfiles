@@ -10,8 +10,9 @@ export TERM='xterm-256color'
 export EDITOR='vim'
 
 # set up less
-export PAGER='less -FRX'
-LESS_PIPE="lesspipe"
+export PAGER=less
+export LESS=FRX
+LESS_PIPE=lesspipe.sh
 export LESSOPEN="| ${LESS_PIPE} %s";
 export LESSCLOSE="${LESS_PIPE} %s %s";
 
