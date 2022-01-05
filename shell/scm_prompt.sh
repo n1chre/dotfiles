@@ -1,9 +1,11 @@
-# Copyright (C) 2015 Facebook, Inc
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This software may be used and distributed according to the terms of the
+# GNU General Public License version 2.
+
 # Maintained by Ryan McElroy <rm@fb.com>
 #
 # Inspiration and derivation from git-completion.bash by Shawn O. Pearce.
-#
-# Distributed under the GNU General Public License, version 2.0.
 #
 # ========================================================================
 #
@@ -50,6 +52,11 @@
 #    is a remote or autofs mount point.
 #  * WANT_OLD_SCM_PROMPT : Use '%s' as the formatting for the prompt instead
 #    of ' (%s)'
+#  * SHOW_DIRTY_STATE : Show dirty state of the working directory of a
+#    repo with a star *. In addition, for hg, show untracked files with ?.
+#    For git, show staged change with +.  When SHOW_DIRTY_STATE is set,
+#    you can opt out invidivual repo by setting shell.showDirtyState to false
+#    in .hg/hgrc or .git/config.
 #
 # Notes to developers:
 #
@@ -99,27 +106,23 @@ _hg_prompt() {
   elif [[ -L "$hg/wlock" ]]; then
     extra="|WDIR-LOCKED"
   fi
+
   local dirstate="$( \
     ( [[ -f "$hg/dirstate" ]] && \
     command hexdump -vn 20 -e '1/1 "%02x"' "$hg/dirstate") || \
     builtin echo "empty")"
 
-  local remote="$hg/remotenames"
   local shared_hg="$hg"
   if [[ -f "$hg/sharedpath" ]]; then
     shared_hg="$(command cat $hg/sharedpath)"
-    remote="$shared_hg/remotenames"
   fi
+  local remote="$shared_hg/store/remotenames"
 
   local active="$hg/bookmarks.current"
   if  [[ -f "$active" ]]; then
     br="$(command cat "$active")"
     # check to see if active bookmark needs update (eg, moved after pull)
-    local marks="$hg/bookmarks"
-    if [[ -f "$hg/sharedpath" && -f "$hg/shared" ]] &&
-        command grep -q '^bookmarks$' "$hg/shared"; then
-      marks="$shared_hg/bookmarks"
-    fi
+    local marks="$shared_hg/store/bookmarks"
     if [[ -z "$extra" ]] && [[ -f "$marks" ]]; then
       local markstate="$(command grep " $br$" "$marks" | \
         command cut -f 1 -d ' ')"
@@ -128,7 +131,7 @@ _hg_prompt() {
       fi
     fi
   else
-    br="$(builtin echo "$dirstate" | command cut -c 1-7)"
+    br="$(builtin echo "$dirstate" | command cut -c 1-9)"
   fi
   if [[ -f "$remote" ]]; then
     local allremotemarks="$(command grep "^$dirstate bookmarks" "$remote" | \
@@ -152,18 +155,41 @@ _hg_prompt() {
       br="$br|$branch"
     fi
   fi
-  br="$br$extra"
+  br="$br$extra$(_hg_dirty)"
   builtin printf "%s" "$br"
+}
+
+# cf. https://www.internalfb.com/intern/qa/4964/how-do-i-show-the-mercurial-bookmarkgit-branch-in?answerID=540621130023036
+_hg_dirty() {
+  if [ -n "${SHOW_DIRTY_STATE}" ] &&
+     [ "$(hg config shell.showDirtyState)" != "false" ]; then
+    command hg status 2> /dev/null \
+    | command awk '$1 == "?" { print "?" } $1 != "?" { print "*" }' \
+    | command sort | command uniq | command head -c1
+  fi
+}
+
+_git_dirty() {
+  # cf. git contrib/completion/git-prompt.sh
+  if [ -n "${SHOW_DIRTY_STATE}" ] &&
+     [ "$(git config --bool shell.showDirtyState)" != "false" ]; then
+       command git diff --no-ext-diff --quiet || w="*"
+       command git diff --no-ext-diff --cached --quiet || i="+"
+       builtin printf "%s" "$w$i"
+  fi
 }
 
 _git_prompt() {
   local git br
   git="$1"
+  if [[ -f "$git" ]]; then
+      git=$(awk '/^gitdir:/ {print $2}' < "$git")
+  fi
   if [[ -f "$git/HEAD" ]]; then
     read br < "$git/HEAD"
     case $br in
       ref:\ refs/heads/*) br=${br#ref: refs/heads/} ;;
-      *) br="$(builtin echo "$br" | command cut -c 1-7)" ;;
+      *) br="$(builtin echo "$br" | command cut -c 1-8)" ;;
     esac
     if [[ -f "$git/rebase-merge/interactive" ]]; then
       b="$(command cat "$git/rebase-merge/head-name")"
@@ -195,6 +221,7 @@ _git_prompt() {
       fi
     fi
   fi
+  br="$br$(_git_dirty)"
   builtin printf "%s" "$br"
 }
 
@@ -204,13 +231,13 @@ _scm_prompt() {
   # - provide a space for the user so that they don't have to have
   #   random extra spaces in their prompt when not in a repo
   # - provide parens so it's differentiated from other crap in their prompt
-  fmt="${1:- %s}"
+  fmt="${1:- (%s)}"
 
   # find out if we're in a git or hg repo by looking for the control dir
   dir="$PWD"
   while : ; do
     [[ -n "$HOME_IS_NOT_A_REPO" ]] && [[ "$dir" = "/home" ]] && break
-    if [[ -d "$dir/.git" ]]; then
+    if [[ -r "$dir/.git" ]]; then
       br="$(_git_prompt "$dir/.git")"
       break
     elif [[ -d "$dir/.hg" ]]; then
@@ -225,4 +252,25 @@ _scm_prompt() {
   if [[ -n "$br" ]]; then
     builtin printf "$fmt" "$br"
   fi
+}
+
+#
+# Backwards-compatibility layer for odl scm-prompt script
+#
+# Older versions of this file at Facebook used a longer function name.
+# These versions also included support for an environmental directive
+# called $WANT_OLD_SCM_PROMPT. Support this to remain compatible.
+#
+
+_dotfiles_scm_info() {
+  local fmt
+  fmt=$1
+  if [[ -z "$fmt" ]]; then
+    if [[ -n "$WANT_OLD_SCM_PROMPT" ]]; then
+      fmt="%s"
+    else
+      fmt=' (%s)'
+    fi
+  fi
+  _scm_prompt "$fmt"
 }
