@@ -255,7 +255,7 @@ _scm_prompt() {
 }
 
 #
-# Backwards-compatibility layer for odl scm-prompt script
+# Backwards-compatibility layer for old scm-prompt script
 #
 # Older versions of this file at Facebook used a longer function name.
 # These versions also included support for an environmental directive

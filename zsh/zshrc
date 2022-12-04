@@ -21,11 +21,14 @@ source ${MY_ZSH}/completion.sh
 source ${MY_ZSH}/history.sh
 source ${MY_ZSH}/options.sh
 
-# any local settings ?
+# any local shell settings ?
+[ -f ~/.shellrc.local ] && source ~/.shellrc.local
+
+# any local zsh specific settings ?
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 # source fuzzy finder
-source $DOTFILES/shell/fzf.sh
+source $DOTFILES/shell/fzf.sh zsh
 
 export PATH="$(cleanup_path $PATH)"
 export MANPATH="$(cleanup_path $MANPATH)"

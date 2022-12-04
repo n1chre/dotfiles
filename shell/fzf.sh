@@ -1,12 +1,14 @@
 #! /usr/bin/env bash
 
-current_shell=$(ps -o args= -p "$$")
+current_shell="$1"
+if [[ -z "$current_shell" ]]; then current_shell=$(ps -o args= -p "$$"); fi
+
 if [[ "${current_shell}" = *bash ]]; then
   FZF_FILE=~/.fzf.bash
 elif [[ "${current_shell}" = *zsh ]]; then
   FZF_FILE=~/.fzf.zsh
 else
-  echo "Unknown shell: ${current_shell}"
+  echo "FZF - Unknown shell: ${current_shell}"
   return
 fi
 unset current_shell

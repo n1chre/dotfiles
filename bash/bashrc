@@ -12,13 +12,16 @@ source ${MY_BASH}/completion.sh
 source ${MY_BASH}/history.sh
 source ${MY_BASH}/options.sh
 
-# eval $(dircolors ${MY_BASH}/dircolors)
+eval $(dircolors ${MY_BASH}/dircolors)
 
-# any local settings ?
+# any local shell settings ?
+[ -f ~/.shellrc.local ] && source ~/.shellrc.local
+
+# any local bash settings ?
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 # source fuzzy finder
-source ${DOTFILES}/shell/fzf.sh
+source ${DOTFILES}/shell/fzf.sh bash
 
 # now set up prompt
 source ${MY_BASH}/prompt.sh

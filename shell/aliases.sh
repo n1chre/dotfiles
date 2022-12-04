@@ -2,6 +2,7 @@
 alias cd=' cd'
 alias exit=' exit'
 alias ls=' ls --color'
+alias la=' ls -la'
 alias pwd=' pwd'
 
 # interactive rm
